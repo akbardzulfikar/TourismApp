@@ -1,19 +1,15 @@
 package com.dicoding.tourismapp.di
 
-import com.dicoding.tourismapp.detail.DetailTourismViewModel
 import com.dicoding.tourismapp.domain.usecase.TourismInteractor
 import com.dicoding.tourismapp.domain.usecase.TourismUseCase
-import com.dicoding.tourismapp.favorite.FavoriteViewModel
-import com.dicoding.tourismapp.home.HomeViewModel
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
 
-val useCaseModule = module {
-    factory<TourismUseCase> { TourismInteractor(get()) }
-}
 
-val viewModelModule = module {
-    viewModel { HomeViewModel(get()) }
-    viewModel { FavoriteViewModel(get()) }
-    viewModel { DetailTourismViewModel(get()) }
+@Module
+abstract class AppModule {
+
+    @Binds
+    abstract fun provideTourismUseCase(tourismInteractor: TourismInteractor): TourismUseCase
+
 }
